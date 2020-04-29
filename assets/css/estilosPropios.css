@@ -1,0 +1,7 @@
+.multiple-icons {
+    display: inline-flex;
+}
+
+.multiple-icons > span{
+    padding: 1px;
+}
