@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsArticle from '../../../components/views/NewsArticle.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news
+    .filter((n) => n.id.startsWith('es/') && !n.data.draft)
+    .map((n) => ({
+      params: { slug: n.id.split('/').slice(1).join('/') },
+      props: { entry: n },
+    }));
+}
+
+const { entry } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const description = entry.data.excerpt ?? t.seo.home.description;
+---
+
+<BaseLayout title={`${entry.data.title} · ${t.meta.siteName}`} description={description}>
+  <NewsArticle entry={entry} lang={lang} />
+</BaseLayout>

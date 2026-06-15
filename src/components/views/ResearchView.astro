@@ -1,0 +1,156 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import PublicationCard from '../research/PublicationCard.astro';
+import ThesisCard from '../research/ThesisCard.astro';
+import NewsCard from '../research/NewsCard.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const pubKey = (p: CollectionEntry<'publications'>) =>
+  p.data.date ? p.data.date.getTime() : new Date(p.data.year, 11, 31).getTime();
+
+const allPubs = await getCollection('publications');
+const articles = allPubs
+  .filter((p) => p.data.type !== 'communication')
+  .sort((a, b) => pubKey(b) - pubKey(a));
+const communications = allPubs
+  .filter((p) => p.data.type === 'communication')
+  .sort((a, b) => pubKey(b) - pubKey(a));
+
+const theses = (await getCollection('theses'))
+  .filter((t) => !t.data.draft)
+  .sort((a, b) => b.data.year - a.data.year);
+
+const news = (await getCollection('news'))
+  .filter((n) => n.id.startsWith(`${lang}/`) && !n.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const sections = [
+  { id: 'publications', label: t.research.tabs.publications },
+  { id: 'communications', label: t.research.tabs.communications },
+  { id: 'news', label: t.research.tabs.news },
+  { id: 'theses', label: t.research.tabs.theses },
+];
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <p class="eyebrow">{t.meta.siteName}</p>
+      <h1>{t.research.title}</h1>
+      <p>{t.research.intro}</p>
+    </div>
+
+    <nav class="research-nav" aria-label={t.research.title}>
+      {sections.map((s) => <a class="research-nav__chip" href={`#${s.id}`}>{s.label}</a>)}
+    </nav>
+
+    <div class="research-block" id="publications">
+      <h2>{t.research.tabs.publications}</h2>
+      {
+        articles.length > 0 ? (
+          <div class="research-grid">
+            {articles.map((entry) => (
+              <PublicationCard entry={entry} lang={lang} />
+            ))}
+          </div>
+        ) : (
+          <p class="research-empty">{t.research.empty}</p>
+        )
+      }
+    </div>
+
+    <div class="research-block" id="communications">
+      <h2>{t.research.tabs.communications}</h2>
+      {
+        communications.length > 0 ? (
+          <div class="research-grid">
+            {communications.map((entry) => (
+              <PublicationCard entry={entry} lang={lang} />
+            ))}
+          </div>
+        ) : (
+          <p class="research-empty">{t.research.empty}</p>
+        )
+      }
+    </div>
+
+    <div class="research-block" id="news">
+      <h2>{t.research.tabs.news}</h2>
+      {
+        news.length > 0 ? (
+          <div class="research-grid">
+            {news.map((entry) => (
+              <NewsCard entry={entry} lang={lang} />
+            ))}
+          </div>
+        ) : (
+          <p class="research-empty">{t.research.empty}</p>
+        )
+      }
+    </div>
+
+    <div class="research-block" id="theses">
+      <h2>{t.research.tabs.theses}</h2>
+      {
+        theses.length > 0 ? (
+          <div class="research-grid">
+            {theses.map((entry) => (
+              <ThesisCard entry={entry} lang={lang} />
+            ))}
+          </div>
+        ) : (
+          <p class="research-empty">{t.research.empty}</p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .research-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+  }
+  .research-nav__chip {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+  .research-nav__chip:hover {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .research-block {
+    margin-top: var(--space-16);
+  }
+  .research-block h2 {
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: var(--space-8);
+  }
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-6);
+  }
+  .research-empty {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>

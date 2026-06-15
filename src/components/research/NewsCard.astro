@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, localizePath, formatDate, type Lang } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+// id is "<lang>/<slug>"; the public URL keeps only the slug.
+const slug = entry.id.split('/').slice(1).join('/');
+const href = localizePath(`/research/news/${slug}`, lang);
+---
+
+<article class="news-card card">
+  <p class="news-card__date">
+    <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date, lang)}</time>
+  </p>
+  <h3 class="news-card__title">
+    <a href={href}>{entry.data.title}</a>
+  </h3>
+  {entry.data.excerpt && <p class="news-card__excerpt">{entry.data.excerpt}</p>}
+  <a class="news-card__more" href={href}>{t.research.readMore} →</a>
+</article>
+
+<style>
+  .news-card {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .news-card__date {
+    color: var(--color-text-muted);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .news-card__title {
+    font-size: var(--fs-600);
+  }
+  .news-card__title a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .news-card__title a:hover {
+    text-decoration: underline;
+  }
+  .news-card__excerpt {
+    color: var(--color-text-muted);
+  }
+  .news-card__more {
+    margin-top: var(--space-2);
+    font-weight: 600;
+    font-size: var(--fs-300);
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section section--subtle">
+  <div class="container">
+    <div class="section__intro">
+      <h2>{t.pillars.heading}</h2>
+    </div>
+    <div class="grid pillars">
+      {
+        t.pillars.items.map((item, i) => (
+          <article class="card pillar">
+            <span class="pillar__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="pillar__title">{item.title}</h3>
+            <p class="pillar__body">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pillar {
+    position: relative;
+    padding-top: var(--space-8);
+  }
+  .pillar__num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .pillar__title {
+    margin-top: var(--space-3);
+  }
+  .pillar__body {
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 44em) {
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

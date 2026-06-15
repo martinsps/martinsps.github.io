@@ -1,0 +1,205 @@
+---
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { CONTACT } from '../../config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const privacyHref = localizePath('/privacy', lang);
+---
+
+<section class="section section--subtle" id="contact">
+  <div class="container container-narrow">
+    <div class="section__intro contact__intro">
+      <p class="eyebrow">{t.meta.siteName}</p>
+      <h2>{t.contact.heading}</h2>
+      <p>{t.contact.lead}</p>
+    </div>
+
+    <form
+      class="contact-form card"
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      data-contact-form
+      data-sending={t.contact.sending}
+      data-success={t.contact.success}
+      data-error={t.contact.error}
+    >
+      <input type="hidden" name="access_key" value={CONTACT.web3formsKey} />
+      <input type="hidden" name="subject" value={`NOVA · ${t.contact.heading}`} />
+      <input type="hidden" name="from_name" value="Proyecto NOVA" />
+      <!-- Honeypot anti-spam (hidden from real users) -->
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="visually-hidden"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+
+      <div class="contact-form__row">
+        <div class="field">
+          <label for="cf-name">{t.contact.name} <span aria-hidden="true">*</span></label>
+          <input id="cf-name" name="name" type="text" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="cf-email">{t.contact.email} <span aria-hidden="true">*</span></label>
+          <input id="cf-email" name="email" type="email" required autocomplete="email" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cf-affiliation">{t.contact.affiliation}</label>
+        <input id="cf-affiliation" name="affiliation" type="text" autocomplete="organization" />
+      </div>
+
+      <div class="field">
+        <label for="cf-message">{t.contact.message} <span aria-hidden="true">*</span></label>
+        <textarea id="cf-message" name="message" rows="5" required></textarea>
+      </div>
+
+      <div class="field field--checkbox">
+        <input id="cf-consent" name="consent" type="checkbox" required />
+        <label for="cf-consent">
+          {t.contact.consent}
+          <a href={privacyHref}>{t.footer.privacy}</a>
+        </label>
+      </div>
+
+      <div class="contact-form__footer">
+        <button type="submit" class="btn btn--primary">{t.contact.submit}</button>
+        <p class="form__status" role="status" aria-live="polite" data-form-status></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const statusEl = form?.querySelector<HTMLElement>('[data-form-status]');
+  const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (form && statusEl && submitBtn) {
+    const labels = {
+      sending: form.dataset.sending ?? '',
+      success: form.dataset.success ?? '',
+      error: form.dataset.error ?? '',
+      submit: submitBtn.textContent ?? '',
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusEl.className = 'form__status';
+      statusEl.textContent = labels.sending;
+      submitBtn.disabled = true;
+      submitBtn.textContent = labels.sending;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json();
+        if (response.ok && result.success) {
+          statusEl.classList.add('is-success');
+          statusEl.textContent = labels.success;
+          form.reset();
+        } else {
+          throw new Error(result.message || 'error');
+        }
+      } catch {
+        statusEl.classList.add('is-error');
+        statusEl.textContent = labels.error;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = labels.submit;
+      }
+    });
+  }
+</script>
+
+<style>
+  .contact__intro {
+    text-align: center;
+    margin-inline: auto;
+  }
+  .contact-form {
+    display: grid;
+    gap: var(--space-6);
+  }
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+  .field {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .field label {
+    font-weight: 600;
+    font-size: var(--fs-300);
+    color: var(--color-primary);
+  }
+  .field input[type='text'],
+  .field input[type='email'],
+  .field textarea {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .field input:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-light) 25%, transparent);
+  }
+  .field textarea {
+    resize: vertical;
+  }
+  .field--checkbox {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: var(--space-3);
+  }
+  .field--checkbox input {
+    margin-top: 0.3rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--color-primary);
+  }
+  .field--checkbox label {
+    font-weight: 400;
+    font-size: var(--fs-400);
+    color: var(--color-text-muted);
+  }
+  .contact-form__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .form__status {
+    font-size: var(--fs-300);
+    font-weight: 600;
+    margin: 0;
+  }
+  .form__status.is-success {
+    color: #1a7f4b;
+  }
+  .form__status.is-error {
+    color: #c0392b;
+  }
+  @media (max-width: 36em) {
+    .contact-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

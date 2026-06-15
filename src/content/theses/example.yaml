@@ -1,0 +1,14 @@
+# Plantilla de tesis. Está oculta (draft: true): duplica este archivo, cambia los
+# datos y pon `draft: false` para publicarla.
+title: "Título de la tesis (ejemplo)"
+author: Nombre Apellidos
+kind: phd # phd | master | tfg
+year: 2027
+supervisors:
+  - Pablo Roca Morales
+university: Universidad Villanueva
+# url: https://...
+abstract:
+  es: Resumen de la tesis en español.
+  en: Thesis abstract in English.
+draft: true

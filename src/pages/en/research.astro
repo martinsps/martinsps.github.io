@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchView from '../../components/views/ResearchView.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`${t.seo.research.title} · ${t.meta.siteName}`} description={t.seo.research.description}>
+  <ResearchView lang={lang} />
+</BaseLayout>

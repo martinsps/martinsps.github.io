@@ -1,0 +1,164 @@
+---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { SITE, EXTERNAL_LINKS } from '../config';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+
+const institutionalLinks = [
+  { href: EXTERNAL_LINKS.premind, label: t.footer.premind },
+  { href: EXTERNAL_LINKS.villanueva, label: t.footer.villanueva },
+  { href: EXTERNAL_LINKS.pabloRoca, label: t.footer.pabloRoca },
+];
+
+const navLinks = [
+  { href: '/', label: t.nav.home },
+  { href: '/research', label: t.nav.research },
+  { href: '/team', label: t.nav.team },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <span class="site-footer__mark">NOVA</span>
+      <p>{t.hero.tagline}</p>
+      <p class="site-footer__muted">{SITE.longName} · PreMind · Universidad Villanueva</p>
+    </div>
+
+    <nav class="site-footer__col" aria-label={t.nav.home}>
+      <h2 class="site-footer__heading">{SITE.name}</h2>
+      <ul role="list">
+        {navLinks.map((l) => <li><a href={localizePath(l.href, lang)}>{l.label}</a></li>)}
+        <li><a href={localizePath('/privacy', lang)}>{t.footer.privacy}</a></li>
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label={t.footer.institutional}>
+      <h2 class="site-footer__heading">{t.footer.institutional}</h2>
+      <ul role="list">
+        {
+          institutionalLinks.map((l) => (
+            <li>
+              <a href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-footer__funding">
+      <h2 class="site-footer__heading">{t.footer.fundedBy}</h2>
+      {/*
+        TODO: replace this text placeholder with the official funder logo.
+        Drop the file in src/assets/funders/ and render it with astro:assets:
+          import ministerio from '../assets/funders/ministerio.svg';
+          import { Image } from 'astro:assets';
+          <Image src={ministerio} alt="..." height={64} />
+      */}
+      <div class="funder-logo" role="img" aria-label={t.footer.funder}>
+        <span>{t.footer.funder}</span>
+      </div>
+      <p class="site-footer__muted">{t.footer.projectRefLabel}: {SITE.projectRef}</p>
+    </div>
+  </div>
+
+  <div class="site-footer__bar">
+    <div class="container site-footer__bar-inner">
+      <p>© {year} {SITE.longName}. {t.footer.rights}</p>
+      <a href={localizePath('/privacy', lang)}>{t.footer.privacy}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-primary-dark);
+    color: color-mix(in srgb, var(--color-on-primary) 82%, transparent);
+    margin-top: var(--space-20);
+  }
+  .site-footer a {
+    color: color-mix(in srgb, var(--color-on-primary) 82%, transparent);
+    text-decoration: none;
+  }
+  .site-footer a:hover {
+    color: var(--color-accent);
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: var(--space-8);
+    padding-block: var(--space-16);
+  }
+  .site-footer__mark {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-on-primary);
+    letter-spacing: 0.04em;
+  }
+  .site-footer__brand p {
+    margin-top: var(--space-2);
+    max-width: 28ch;
+  }
+  .site-footer__muted {
+    color: color-mix(in srgb, var(--color-on-primary) 60%, transparent);
+    font-size: var(--fs-300);
+  }
+  .site-footer__heading {
+    font-family: var(--font-sans);
+    font-size: var(--fs-300);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .site-footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .funder-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 5rem;
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    border: 1px dashed color-mix(in srgb, var(--color-on-primary) 35%, transparent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-on-primary) 6%, transparent);
+    font-size: var(--fs-300);
+    color: color-mix(in srgb, var(--color-on-primary) 75%, transparent);
+  }
+  .site-footer__bar {
+    border-top: 1px solid color-mix(in srgb, var(--color-on-primary) 14%, transparent);
+  }
+  .site-footer__bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding-block: var(--space-6);
+    font-size: var(--fs-300);
+  }
+
+  @media (max-width: 60em) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 36em) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

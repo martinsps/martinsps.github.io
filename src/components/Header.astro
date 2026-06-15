@@ -1,0 +1,235 @@
+---
+import { getLangFromUrl, useTranslations, localizePath, stripLang } from '../i18n/utils';
+import { SITE } from '../config';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const current = stripLang(Astro.url.pathname);
+
+const navItems = [
+  { href: '/', label: t.nav.home },
+  { href: '/research', label: t.nav.research },
+  { href: '/team', label: t.nav.team },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current === href || current.startsWith(`${href}/`);
+---
+
+<header class="site-header" data-site-header>
+  <div class="container site-header__inner">
+    <a href={localizePath('/', lang)} class="brand" aria-label={SITE.longName}>
+      <span class="brand__mark">NOVA</span>
+      <span class="brand__sub">{lang === 'es' ? 'Salud Mental de Precisión' : 'Precision Mental Health'}</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label={t.a11y.openMenu}
+      data-nav-toggle
+    >
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label={t.nav.home}>
+      <ul role="list" class="site-nav__list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={localizePath(item.href, lang)}
+                class:list={['site-nav__link', { 'is-active': isActive(item.href) }]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="site-nav__lang">
+        <LanguageSwitcher />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+
+  const setOpen = (open: boolean) => {
+    header?.classList.toggle('is-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle?.addEventListener('click', () => {
+    setOpen(!header?.classList.contains('is-open'));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    min-height: 4.25rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--color-primary);
+  }
+  .brand__mark {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .brand__sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-nav__link {
+    position: relative;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    padding-block: 0.25rem;
+  }
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.15rem;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+  }
+  .site-nav__link:hover,
+  .site-nav__link.is-active {
+    color: var(--color-primary);
+  }
+  .site-nav__link:hover::after,
+  .site-nav__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    place-items: center;
+  }
+  .nav-toggle__bars,
+  .nav-toggle__bars::before,
+  .nav-toggle__bars::after {
+    content: '';
+    display: block;
+    width: 1.25rem;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+  .nav-toggle__bars {
+    position: relative;
+  }
+  .nav-toggle__bars::before {
+    position: absolute;
+    top: -0.4rem;
+  }
+  .nav-toggle__bars::after {
+    position: absolute;
+    top: 0.4rem;
+  }
+
+  @media (max-width: 48em) {
+    .nav-toggle {
+      display: grid;
+    }
+    .site-nav {
+      position: absolute;
+      inset: 100% 0 auto 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+      padding: var(--space-6);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-8px);
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity var(--transition),
+        transform var(--transition),
+        visibility var(--transition);
+    }
+    .site-header.is-open .site-nav {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .site-header.is-open .nav-toggle__bars {
+      background: transparent;
+    }
+    .site-header.is-open .nav-toggle__bars::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+    .site-header.is-open .nav-toggle__bars::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+    .site-nav__list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+  }
+</style>

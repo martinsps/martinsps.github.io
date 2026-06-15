@@ -1,0 +1,19 @@
+---
+import Hero from '../sections/Hero.astro';
+import ProjectSummary from '../sections/ProjectSummary.astro';
+import Pillars from '../sections/Pillars.astro';
+import Phases from '../sections/Phases.astro';
+import ContactForm from '../sections/ContactForm.astro';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<Hero lang={lang} />
+<ProjectSummary lang={lang} />
+<Pillars lang={lang} />
+<Phases lang={lang} />
+<ContactForm lang={lang} />

@@ -1,0 +1,52 @@
+---
+import { getAlternateLinks, type Lang } from '../i18n/utils';
+
+interface Props {
+  /** Full document title (already includes the brand suffix if desired). */
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Optional OG image path relative to the site root, e.g. "/og/home.png". */
+  ogImage?: string;
+}
+
+const { title, description, lang, ogImage } = Astro.props;
+
+const fallbackOrigin = new URL(Astro.url.origin);
+const base = Astro.site ?? fallbackOrigin;
+
+const canonicalURL = new URL(Astro.url.pathname, base);
+const alternates = getAlternateLinks(Astro.url).map((alt) => ({
+  ...alt,
+  href: new URL(alt.path, base).href,
+}));
+const xDefault = alternates.find((a) => a.lang === 'es')?.href;
+const ogImageURL = ogImage ? new URL(ogImage, base).href : undefined;
+const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL.href} />
+
+{
+  alternates.map((alt) => (
+    <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+  ))
+}
+{xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:site_name" content="Proyecto NOVA" />
+<meta property="og:locale" content={ogLocale} />
+{ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content={ogImageURL ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImageURL && <meta name="twitter:image" content={ogImageURL} />}

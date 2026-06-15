@@ -1,0 +1,10 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Eduar Ramírez Riveros
+category: core
+order: 4
+role:
+  es: Investigador
+  en: Researcher
+# photo: ./photos/eduar-ramirez-riveros.jpg
+links:
+  premind: https://www.villanueva.edu/grupo-investigacion/premind/

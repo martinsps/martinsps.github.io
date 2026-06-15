@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`${t.seo.notFound.title} · ${t.meta.siteName}`} description={t.seo.notFound.description}>
+  <section class="section">
+    <div class="container container-narrow not-found">
+      <p class="not-found__code">404</p>
+      <h1>{t.notFound.heading}</h1>
+      <p class="lead">{t.notFound.body}</p>
+      <a class="btn btn--primary" href={localizePath('/', lang)}>{t.notFound.cta}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+  }
+  .not-found__code {
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .not-found .lead {
+    margin: var(--space-4) 0 var(--space-8);
+  }
+</style>

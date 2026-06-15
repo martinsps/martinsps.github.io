@@ -1,0 +1,21 @@
+# TODO: completa y verifica la lista de autores en su orden correcto.
+type: article
+title: "Transforming psychological practice with precision mental health: introduction to the NOVA project"
+authors:
+  - "Roca, P."
+  - "Rodríguez-Moreno, S."
+venue: Frontiers in Psychology
+year: 2026
+date: 2026-01-01
+doi: 10.3389/fpsyg.2026.1775489
+url: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1775489/full
+featured: true
+summary:
+  es: >-
+    Artículo que presenta el Proyecto NOVA y el marco de la salud mental de
+    precisión: medición sistemática y analítica de datos para ofrecer la
+    intervención adecuada, en el momento adecuado, para cada persona.
+  en: >-
+    Article introducing the NOVA project and the precision mental health
+    framework: systematic measurement and data analytics to deliver the right
+    intervention, at the right time, for each individual.

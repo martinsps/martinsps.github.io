@@ -1,0 +1,21 @@
+# TODO: verifica el contenido y añade foto/enlaces (ORCID, Scholar, LinkedIn).
+# Para la foto: coloca el archivo junto a este YAML y descomenta `photo`.
+name: Pablo Roca Morales
+category: pi
+order: 1
+role:
+  es: Investigador principal
+  en: Principal investigator
+bio:
+  es: >-
+    Doctor en Psicología y profesor en la Universidad Villanueva. Dirige el
+    laboratorio PreMind y el Proyecto NOVA, centrado en la salud mental de
+    precisión y la inteligencia artificial aplicada a la salud mental.
+  en: >-
+    PhD in Psychology and professor at Villanueva University. He leads the
+    PreMind lab and the NOVA project, focused on precision mental health and
+    artificial intelligence applied to mental health.
+# photo: ./photos/pablo-roca.jpg
+links:
+  personal: https://pablorocamorales.com/
+  premind: https://www.villanueva.edu/grupo-investigacion/premind/

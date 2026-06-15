@@ -1,0 +1,10 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Ana Isabel Georgescu Domínguez
+category: training
+order: 6
+role:
+  es: Investigadora en formación
+  en: Early-career researcher
+# photo: ./photos/ana-georgescu-dominguez.jpg
+links:
+  premind: https://www.villanueva.edu/grupo-investigacion/premind/

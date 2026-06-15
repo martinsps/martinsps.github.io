@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, pickLocalized, type Lang } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'publications'>;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+const d = entry.data;
+const summary = pickLocalized(d.summary, lang);
+const doiUrl = d.doi ? `https://doi.org/${d.doi}` : undefined;
+---
+
+<article class="pub card">
+  <div class="pub__head">
+    <span class="badge">{t.research.publicationTypes[d.type]}</span>
+    <span class="pub__year">{d.year}</span>
+  </div>
+  <h3 class="pub__title">
+    {
+      d.url ? (
+        <a href={d.url} target="_blank" rel="noopener noreferrer">
+          {d.title}
+        </a>
+      ) : (
+        d.title
+      )
+    }
+  </h3>
+  {d.authors.length > 0 && <p class="pub__authors">{d.authors.join('; ')}</p>}
+  {d.venue && <p class="pub__venue">{d.venue}</p>}
+  {summary && <p class="pub__summary">{summary}</p>}
+  <div class="pub__meta">
+    {
+      doiUrl && (
+        <a href={doiUrl} target="_blank" rel="noopener noreferrer">
+          {t.research.doiLabel}: {d.doi}
+        </a>
+      )
+    }
+    {
+      d.url && (
+        <a href={d.url} target="_blank" rel="noopener noreferrer">
+          {t.research.viewSource} →
+        </a>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .pub {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .pub__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-1);
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+  .pub__year {
+    color: var(--color-text-muted);
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+  .pub__title {
+    font-size: var(--fs-500);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .pub__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .pub__title a:hover {
+    text-decoration: underline;
+  }
+  .pub__authors {
+    color: var(--color-text);
+    font-size: var(--fs-400);
+  }
+  .pub__venue {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+  .pub__summary {
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+  }
+  .pub__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,10 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Carolina Martín Azañedo
+category: core
+order: 3
+role:
+  es: Investigadora
+  en: Researcher
+# photo: ./photos/carolina-martin-azanedo.jpg
+links:
+  premind: https://www.villanueva.edu/grupo-investigacion/premind/

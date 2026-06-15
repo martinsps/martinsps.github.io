@@ -1,0 +1,88 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, pickLocalized, type Lang } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'theses'>;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+const d = entry.data;
+const abstract = pickLocalized(d.abstract, lang);
+---
+
+<article class="thesis card">
+  <div class="thesis__head">
+    <span class="badge">{t.research.thesisKinds[d.kind]}</span>
+    <span class="thesis__year">{d.year}</span>
+  </div>
+  <h3 class="thesis__title">
+    {
+      d.url ? (
+        <a href={d.url} target="_blank" rel="noopener noreferrer">
+          {d.title}
+        </a>
+      ) : (
+        d.title
+      )
+    }
+  </h3>
+  <p class="thesis__author">{d.author}{d.university ? ` · ${d.university}` : ''}</p>
+  {
+    d.supervisors.length > 0 && (
+      <p class="thesis__sup">
+        {t.research.supervisedBy}: {d.supervisors.join('; ')}
+      </p>
+    )
+  }
+  {abstract && <p class="thesis__abstract">{abstract}</p>}
+</article>
+
+<style>
+  .thesis {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .thesis__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: var(--color-accent-dark);
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+  .thesis__year {
+    color: var(--color-text-muted);
+    font-size: var(--fs-300);
+    font-weight: 600;
+  }
+  .thesis__title {
+    font-size: var(--fs-500);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .thesis__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .thesis__title a:hover {
+    text-decoration: underline;
+  }
+  .thesis__author {
+    font-weight: 600;
+  }
+  .thesis__sup,
+  .thesis__abstract {
+    color: var(--color-text-muted);
+    font-size: var(--fs-400);
+  }
+</style>

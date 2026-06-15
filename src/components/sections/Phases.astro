@@ -1,0 +1,82 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <h2>{t.phases.heading}</h2>
+      <p>{t.phases.lead}</p>
+    </div>
+    <ol class="phases" role="list">
+      {
+        t.phases.items.map((item, i) => (
+          <li class="phase">
+            <span class="phase__num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <h3 class="phase__title">{item.title}</h3>
+            <p class="phase__body">{item.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: phase;
+  }
+  .phase {
+    position: relative;
+    padding-top: var(--space-6);
+    border-top: 2px solid var(--color-border);
+  }
+  .phase__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
+  .phase__title {
+    margin-top: var(--space-4);
+    font-size: var(--fs-500);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .phase__body {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--fs-400);
+  }
+  @media (max-width: 60em) {
+    .phases {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 36em) {
+    .phases {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

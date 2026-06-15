@@ -1,0 +1,56 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { useTranslations, localizePath, formatDate, type Lang } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+---
+
+<article class="section">
+  <div class="container container-narrow">
+    <a class="news-detail__back" href={localizePath('/research#news', lang)}>
+      {t.research.backToResearch}
+    </a>
+    <p class="news-detail__date">
+      {t.news.published}
+      <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date, lang)}</time>
+    </p>
+    <h1 class="news-detail__title">{entry.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+    <a class="news-detail__back" href={localizePath('/research#news', lang)}>
+      {t.news.backToList}
+    </a>
+  </div>
+</article>
+
+<style>
+  .news-detail__back {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--fs-300);
+    text-decoration: none;
+    margin-bottom: var(--space-6);
+  }
+  .news-detail__date {
+    color: var(--color-text-muted);
+    font-size: var(--fs-300);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .news-detail__title {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+  .news-detail__back:last-child {
+    margin-top: var(--space-12);
+    margin-bottom: 0;
+  }
+</style>

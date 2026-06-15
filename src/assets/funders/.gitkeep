@@ -1,0 +1,2 @@
+# Coloca aquí los logotipos de la(s) entidad(es) financiadora(s).
+# Luego renderízalos en src/components/Footer.astro con astro:assets (<Image />).
