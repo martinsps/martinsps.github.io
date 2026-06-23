@@ -84,10 +84,9 @@ const es = {
   },
   research: {
     title: 'Investigación',
-    intro: 'Publicaciones, comunicaciones, noticias y tesis del Proyecto NOVA y del laboratorio PreMind.',
+    intro: 'Publicaciones, noticias y tesis del Proyecto NOVA y del laboratorio PreMind.',
     tabs: {
       publications: 'Publicaciones',
-      communications: 'Comunicaciones',
       news: 'Noticias',
       theses: 'Tesis',
     },
@@ -136,11 +135,14 @@ const es = {
   footer: {
     fundedBy: 'Proyecto financiado por',
     funder: 'Ministerio de Ciencia, Innovación y Universidades',
+    grant:
+      'Ayuda PID2024-156740OA-I00 financiada por MICIU/AEI/10.13039/501100011033 y por FEDER, UE.',
     projectRefLabel: 'Referencia',
     institutional: 'Enlaces',
     premind: 'PreMind – Universidad Villanueva',
     villanueva: 'Universidad Villanueva',
     pabloRoca: 'Pablo Roca (Investigador Principal)',
+    linkedin: 'LinkedIn del proyecto',
     rights: 'Todos los derechos reservados.',
     privacy: 'Política de privacidad',
   },
@@ -153,7 +155,7 @@ const es = {
     research: {
       title: 'Investigación',
       description:
-        'Publicaciones científicas, comunicaciones, noticias y tesis del Proyecto NOVA y del laboratorio PreMind (Universidad Villanueva).',
+        'Publicaciones científicas, noticias y tesis del Proyecto NOVA y del laboratorio PreMind (Universidad Villanueva).',
     },
     team: {
       title: 'Equipo',
@@ -248,10 +250,9 @@ const en: Dictionary = {
   },
   research: {
     title: 'Research',
-    intro: 'Publications, communications, news and theses from the NOVA project and the PreMind lab.',
+    intro: 'Publications, news and theses from the NOVA project and the PreMind lab.',
     tabs: {
       publications: 'Publications',
-      communications: 'Communications',
       news: 'News',
       theses: 'Theses',
     },
@@ -300,11 +301,14 @@ const en: Dictionary = {
   footer: {
     fundedBy: 'Project funded by',
     funder: 'Spanish Ministry of Science, Innovation and Universities',
+    grant:
+      'Grant PID2024-156740OA-I00 funded by MICIU/AEI/10.13039/501100011033 and by ERDF, EU.',
     projectRefLabel: 'Reference',
     institutional: 'Links',
     premind: 'PreMind – Villanueva University',
     villanueva: 'Villanueva University',
     pabloRoca: 'Pablo Roca (Principal Investigator)',
+    linkedin: 'Project LinkedIn',
     rights: 'All rights reserved.',
     privacy: 'Privacy policy',
   },
@@ -317,7 +321,7 @@ const en: Dictionary = {
     research: {
       title: 'Research',
       description:
-        'Scientific publications, communications, news and theses from the NOVA project and the PreMind lab (Villanueva University).',
+        'Scientific publications, news and theses from the NOVA project and the PreMind lab (Villanueva University).',
     },
     team: {
       title: 'Team',

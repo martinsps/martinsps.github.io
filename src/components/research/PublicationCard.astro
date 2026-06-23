@@ -11,12 +11,15 @@ const t = useTranslations(lang);
 const d = entry.data;
 const summary = pickLocalized(d.summary, lang);
 const doiUrl = d.doi ? `https://doi.org/${d.doi}` : undefined;
+const dateLabel = d.date
+  ? new Intl.DateTimeFormat(lang, { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(d.date)
+  : String(d.year);
 ---
 
 <article class="pub card">
   <div class="pub__head">
     <span class="badge">{t.research.publicationTypes[d.type]}</span>
-    <span class="pub__year">{d.year}</span>
+    <span class="pub__year">{dateLabel}</span>
   </div>
   <h3 class="pub__title">
     {

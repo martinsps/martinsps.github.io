@@ -10,6 +10,7 @@ const institutionalLinks = [
   { href: EXTERNAL_LINKS.premind, label: t.footer.premind },
   { href: EXTERNAL_LINKS.villanueva, label: t.footer.villanueva },
   { href: EXTERNAL_LINKS.pabloRoca, label: t.footer.pabloRoca },
+  { href: EXTERNAL_LINKS.linkedin, label: t.footer.linkedin },
 ];
 
 const navLinks = [
@@ -52,17 +53,16 @@ const navLinks = [
 
     <div class="site-footer__funding">
       <h2 class="site-footer__heading">{t.footer.fundedBy}</h2>
-      {/*
-        TODO: replace this text placeholder with the official funder logo.
-        Drop the file in src/assets/funders/ and render it with astro:assets:
-          import ministerio from '../assets/funders/ministerio.svg';
-          import { Image } from 'astro:assets';
-          <Image src={ministerio} alt="..." height={64} />
-      */}
-      <div class="funder-logo" role="img" aria-label={t.footer.funder}>
-        <span>{t.footer.funder}</span>
+      <div class="funder-logo">
+        <img
+          src="/funders/logoMinisterio.jpeg"
+          alt={t.footer.funder}
+          width="1600"
+          height="328"
+          loading="lazy"
+        />
       </div>
-      <p class="site-footer__muted">{t.footer.projectRefLabel}: {SITE.projectRef}</p>
+      <p class="site-footer__muted">{t.footer.grant}</p>
     </div>
   </div>
 
@@ -128,15 +128,16 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    min-height: 5rem;
-    padding: var(--space-4);
+    padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-3);
-    border: 1px dashed color-mix(in srgb, var(--color-on-primary) 35%, transparent);
     border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--color-on-primary) 6%, transparent);
-    font-size: var(--fs-300);
-    color: color-mix(in srgb, var(--color-on-primary) 75%, transparent);
+    background: #fff;
+  }
+  .funder-logo img {
+    display: block;
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
   }
   .site-footer__bar {
     border-top: 1px solid color-mix(in srgb, var(--color-on-primary) 14%, transparent);

@@ -21,6 +21,7 @@ export const EXTERNAL_LINKS = {
   premind: 'https://www.villanueva.edu/grupo-investigacion/premind/',
   villanueva: 'https://www.villanueva.edu/',
   pabloRoca: 'https://pablorocamorales.com/',
+  linkedin: 'https://www.linkedin.com/company/laboratorio-premind',
   novaPaper:
     'https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1775489/full',
 } as const;

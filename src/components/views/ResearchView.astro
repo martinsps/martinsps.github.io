@@ -15,12 +15,7 @@ const pubKey = (p: CollectionEntry<'publications'>) =>
   p.data.date ? p.data.date.getTime() : new Date(p.data.year, 11, 31).getTime();
 
 const allPubs = await getCollection('publications');
-const articles = allPubs
-  .filter((p) => p.data.type !== 'communication')
-  .sort((a, b) => pubKey(b) - pubKey(a));
-const communications = allPubs
-  .filter((p) => p.data.type === 'communication')
-  .sort((a, b) => pubKey(b) - pubKey(a));
+const articles = allPubs.sort((a, b) => pubKey(b) - pubKey(a));
 
 const theses = (await getCollection('theses'))
   .filter((t) => !t.data.draft)
@@ -32,7 +27,6 @@ const news = (await getCollection('news'))
 
 const sections = [
   { id: 'publications', label: t.research.tabs.publications },
-  { id: 'communications', label: t.research.tabs.communications },
   { id: 'news', label: t.research.tabs.news },
   { id: 'theses', label: t.research.tabs.theses },
 ];
@@ -56,21 +50,6 @@ const sections = [
         articles.length > 0 ? (
           <div class="research-grid">
             {articles.map((entry) => (
-              <PublicationCard entry={entry} lang={lang} />
-            ))}
-          </div>
-        ) : (
-          <p class="research-empty">{t.research.empty}</p>
-        )
-      }
-    </div>
-
-    <div class="research-block" id="communications">
-      <h2>{t.research.tabs.communications}</h2>
-      {
-        communications.length > 0 ? (
-          <div class="research-grid">
-            {communications.map((entry) => (
               <PublicationCard entry={entry} lang={lang} />
             ))}
           </div>
