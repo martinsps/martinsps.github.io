@@ -57,6 +57,8 @@ const theses = defineCollection({
     university: z.string().optional(),
     url: z.url().optional(),
     abstract: localized.optional(),
+    /** Marca la tesis como "En curso" (work in progress). */
+    inProgress: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsView from '../../components/views/NewsView.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`${t.seo.news.title} · ${t.meta.siteName}`} description={t.seo.news.description}>
+  <NewsView lang={lang} />
+</BaseLayout>

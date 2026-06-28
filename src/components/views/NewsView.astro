@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import NewsCard from '../research/NewsCard.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const news = (await getCollection('news'))
+  .filter((n) => n.id.startsWith(`${lang}/`) && !n.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <p class="eyebrow">{t.meta.siteName}</p>
+      <h1>{t.news.title}</h1>
+      <p>{t.news.intro}</p>
+    </div>
+
+    {
+      news.length > 0 ? (
+        <div class="news-grid">
+          {news.map((entry) => (
+            <NewsCard entry={entry} lang={lang} />
+          ))}
+        </div>
+      ) : (
+        <p class="news-empty">{t.research.empty}</p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-6);
+  }
+  .news-empty {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>

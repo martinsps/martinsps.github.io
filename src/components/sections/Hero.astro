@@ -10,16 +10,40 @@ const t = useTranslations(lang);
 
 <section class="hero">
   <div class="container hero__inner">
-    <p class="hero__eyebrow">{t.hero.eyebrow}</p>
-    <h1 class="hero__title">{t.hero.title}</h1>
-    <p class="hero__tagline">{t.hero.tagline}</p>
-    <p class="hero__subtitle">{t.hero.subtitle}</p>
-    <div class="hero__actions">
-      <a class="btn btn--accent" href="#contact">{t.hero.ctaContact}</a>
-      <a class="btn btn--outline hero__btn-light" href={localizePath('/research', lang)}>
-        {t.hero.ctaResearch}
-      </a>
+    <div class="hero__content">
+      <p class="hero__eyebrow">{t.hero.eyebrow}</p>
+      <h1 class="hero__title">{t.hero.title}</h1>
+      <p class="hero__tagline">{t.hero.tagline}</p>
+      <p class="hero__subtitle">{t.hero.subtitle}</p>
+      <div class="hero__actions">
+        <a class="btn btn--accent" href="#contact">{t.hero.ctaContact}</a>
+        <a class="btn btn--outline hero__btn-light" href={localizePath('/research', lang)}>
+          {t.hero.ctaResearch}
+        </a>
+      </div>
     </div>
+    <ul class="hero__logos" aria-label={t.hero.partners}>
+      <li class="hero__logo-chip">
+        <img
+          class="hero__logo"
+          src="/logos/premind.png"
+          alt="PreMind · Precision Mind Lab"
+          width="2000"
+          height="615"
+          loading="eager"
+        />
+      </li>
+      <li class="hero__logo-chip">
+        <img
+          class="hero__logo"
+          src="/logos/villanueva.png"
+          alt="Universidad Villanueva"
+          width="1920"
+          height="615"
+          loading="eager"
+        />
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -34,6 +58,13 @@ const t = useTranslations(lang);
   }
   .hero__inner {
     padding-block: clamp(var(--space-16), 12vw, var(--space-20));
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: clamp(var(--space-8), 5vw, var(--space-16));
+  }
+  .hero__content {
+    flex: 1 1 34rem;
     max-width: 52rem;
   }
   .hero__eyebrow {
@@ -75,5 +106,56 @@ const t = useTranslations(lang);
     background: var(--color-on-primary);
     color: var(--color-primary);
     border-color: var(--color-on-primary);
+  }
+  .hero__logos {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-6);
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .hero__logo-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .hero__logo {
+    height: 3.5rem;
+    width: 12rem;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+  /* When the two columns no longer fit, drop the logos below the content,
+     centered and laid out horizontally. */
+  @media (max-width: 56rem) {
+    .hero__inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .hero__content {
+      flex: 1 1 auto;
+    }
+    .hero__logos {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+  }
+  @media (max-width: 30rem) {
+    .hero__logo {
+      height: 2.75rem;
+      width: 9.5rem;
+    }
   }
 </style>

@@ -6,6 +6,7 @@ excerpt: >-
   Lorenzo Lorenzo-Luaces (Indiana University Bloomington) sobre inteligencia
   artificial y tratamientos psicológicos personalizados.
 draft: false
+cover: /news/charla-lorenzo.jpeg
 ---
 
 ¿Por qué dos pacientes con el mismo diagnóstico responden de forma tan distinta

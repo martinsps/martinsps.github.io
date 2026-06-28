@@ -2,7 +2,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import PublicationCard from '../research/PublicationCard.astro';
 import ThesisCard from '../research/ThesisCard.astro';
-import NewsCard from '../research/NewsCard.astro';
 import { useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
@@ -14,20 +13,20 @@ const t = useTranslations(lang);
 const pubKey = (p: CollectionEntry<'publications'>) =>
   p.data.date ? p.data.date.getTime() : new Date(p.data.year, 11, 31).getTime();
 
-const allPubs = await getCollection('publications');
-const articles = allPubs.sort((a, b) => pubKey(b) - pubKey(a));
+const allPubs = (await getCollection('publications')).sort((a, b) => pubKey(b) - pubKey(a));
+const articles = allPubs.filter((p) => p.data.type !== 'communication');
+const communications = allPubs.filter((p) => p.data.type === 'communication');
 
 const theses = (await getCollection('theses'))
   .filter((t) => !t.data.draft)
-  .sort((a, b) => b.data.year - a.data.year);
-
-const news = (await getCollection('news'))
-  .filter((n) => n.id.startsWith(`${lang}/`) && !n.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  .sort(
+    (a, b) =>
+      Number(b.data.inProgress) - Number(a.data.inProgress) || b.data.year - a.data.year
+  );
 
 const sections = [
   { id: 'publications', label: t.research.tabs.publications },
-  { id: 'news', label: t.research.tabs.news },
+  { id: 'communications', label: t.research.tabs.communications },
   { id: 'theses', label: t.research.tabs.theses },
 ];
 ---
@@ -59,13 +58,13 @@ const sections = [
       }
     </div>
 
-    <div class="research-block" id="news">
-      <h2>{t.research.tabs.news}</h2>
+    <div class="research-block" id="communications">
+      <h2>{t.research.tabs.communications}</h2>
       {
-        news.length > 0 ? (
+        communications.length > 0 ? (
           <div class="research-grid">
-            {news.map((entry) => (
-              <NewsCard entry={entry} lang={lang} />
+            {communications.map((entry) => (
+              <PublicationCard entry={entry} lang={lang} />
             ))}
           </div>
         ) : (

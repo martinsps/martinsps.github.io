@@ -83,7 +83,7 @@ abstract:               # opcional
 
 Markdown, en subcarpetas por idioma. Para una noticia bilingüe crea **dos archivos con el
 mismo nombre**: `news/es/mi-noticia.md` y `news/en/mi-noticia.md`. El idioma y la URL se
-deducen de la ruta (`/research/news/mi-noticia`).
+deducen de la ruta (`/news/mi-noticia`).
 
 ```markdown
 ---

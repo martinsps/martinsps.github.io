@@ -6,6 +6,7 @@ excerpt: >-
   Lorenzo-Luaces (Indiana University Bloomington) on artificial intelligence and
   personalized psychological treatments.
 draft: false
+cover: /news/charla-lorenzo.jpeg
 ---
 
 Why do two patients with the same diagnosis respond so differently to the same

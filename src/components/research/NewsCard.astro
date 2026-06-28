@@ -10,10 +10,17 @@ const { entry, lang } = Astro.props;
 const t = useTranslations(lang);
 // id is "<lang>/<slug>"; the public URL keeps only the slug.
 const slug = entry.id.split('/').slice(1).join('/');
-const href = localizePath(`/research/news/${slug}`, lang);
+const href = localizePath(`/news/${slug}`, lang);
 ---
 
 <article class="news-card card">
+  {
+    entry.data.cover && (
+      <a class="news-card__cover" href={href} tabindex="-1" aria-hidden="true">
+        <img src={entry.data.cover} alt="" loading="lazy" />
+      </a>
+    )
+  }
   <p class="news-card__date">
     <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date, lang)}</time>
   </p>
@@ -28,6 +35,19 @@ const href = localizePath(`/research/news/${slug}`, lang);
   .news-card {
     display: grid;
     gap: var(--space-2);
+  }
+  .news-card__cover {
+    display: block;
+    margin: calc(-1 * var(--space-6) - 1px) calc(-1 * var(--space-6) - 1px) var(--space-2);
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+  .news-card__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .news-card__date {
     color: var(--color-text-muted);

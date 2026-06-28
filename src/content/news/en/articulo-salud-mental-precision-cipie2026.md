@@ -5,6 +5,7 @@ excerpt: >-
   We present a new paper describing NOVA as a multi-phase translational program
   to bring precision mental health into routine clinical services. It will be
   presented at CIPIE 2026 (Madrid).
+cover: /news/nova-paper.jpeg
 draft: false
 ---
 

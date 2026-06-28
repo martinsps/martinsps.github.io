@@ -5,6 +5,7 @@ excerpt: >-
   The Spanish Ministry of Science and Innovation, co-financed by the European
   Regional Development Fund, awards the R&D project "Precision Mental Health:
   Navigating Outcomes via Analytics (NOVA)".
+cover: /news/logo-ministerio.jpeg
 draft: false
 ---
 

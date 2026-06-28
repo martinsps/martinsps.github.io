@@ -15,7 +15,10 @@ const abstract = pickLocalized(d.abstract, lang);
 <article class="thesis card">
   <div class="thesis__head">
     <span class="badge">{t.research.thesisKinds[d.kind]}</span>
-    <span class="thesis__year">{d.year}</span>
+    <span class="thesis__meta">
+      {d.inProgress && <span class="badge badge--progress">{t.research.inProgress}</span>}
+      <span class="thesis__year">{d.year}</span>
+    </span>
   </div>
   <h3 class="thesis__title">
     {
@@ -58,6 +61,15 @@ const abstract = pickLocalized(d.abstract, lang);
     color: var(--color-accent-dark);
     font-size: var(--fs-300);
     font-weight: 600;
+  }
+  .thesis__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .badge--progress {
+    background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    color: var(--color-primary);
   }
   .thesis__year {
     color: var(--color-text-muted);

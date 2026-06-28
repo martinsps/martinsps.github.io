@@ -6,6 +6,7 @@ excerpt: >-
   multifase para llevar la salud mental de precisión a los servicios clínicos
   habituales. Se presentará en el CIPIE 2026 (Madrid).
 draft: false
+cover: /news/nova-paper.jpeg
 ---
 
 Demasiadas personas siguen sin beneficiarse de la terapia y las tasas de abandono

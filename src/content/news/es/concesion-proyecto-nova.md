@@ -5,6 +5,7 @@ excerpt: >-
   El Ministerio de Ciencia e Innovación, cofinanciado por el Fondo Europeo de
   Desarrollo Regional, concede el proyecto de I+D «Precision Mental Health:
   Navigating Outcomes via Analytics (NOVA)».
+cover: /news/logo-ministerio.jpeg
 draft: false
 ---
 

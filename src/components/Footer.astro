@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
 import { SITE, EXTERNAL_LINKS } from '../config';
+import logoMinisterio from '../assets/funders/logoMinisterio.jpeg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -54,11 +56,11 @@ const navLinks = [
     <div class="site-footer__funding">
       <h2 class="site-footer__heading">{t.footer.fundedBy}</h2>
       <div class="funder-logo">
-        <img
-          src="/funders/logoMinisterio.jpeg"
+        <Image
+          src={logoMinisterio}
           alt={t.footer.funder}
-          width="1600"
-          height="328"
+          width={1600}
+          height={328}
           loading="lazy"
         />
       </div>

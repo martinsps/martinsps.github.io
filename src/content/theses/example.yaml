@@ -11,4 +11,5 @@ university: Universidad Villanueva
 abstract:
   es: Resumen de la tesis en español.
   en: Thesis abstract in English.
+inProgress: false # ponlo a true para mostrar el badge "En curso"
 draft: true

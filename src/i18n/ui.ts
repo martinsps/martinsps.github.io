@@ -17,6 +17,7 @@ const es = {
   nav: {
     home: 'Inicio',
     research: 'Investigación',
+    news: 'Noticias',
     team: 'Equipo',
     skip: 'Saltar al contenido',
   },
@@ -28,11 +29,12 @@ const es = {
   hero: {
     eyebrow: 'PreMind · Universidad Villanueva',
     title: 'NOVA',
-    tagline: 'Navigating Outcomes Via Analytics',
+    tagline: 'Precision Mental Health: Navigating Outcomes Via Analytics',
     subtitle:
       'Llevamos la salud mental de precisión a los servicios psicológicos reales: la intervención adecuada, en el momento adecuado, por el profesional adecuado, para cada persona.',
     ctaContact: 'Participar',
     ctaResearch: 'Ver investigación',
+    partners: 'Impulsado por',
   },
   summary: {
     heading: '¿Qué es el Proyecto NOVA?',
@@ -84,10 +86,10 @@ const es = {
   },
   research: {
     title: 'Investigación',
-    intro: 'Publicaciones, noticias y tesis del Proyecto NOVA y del laboratorio PreMind.',
+    intro: 'Publicaciones, participaciones en congresos y tesis del Proyecto NOVA y del laboratorio PreMind.',
     tabs: {
       publications: 'Publicaciones',
-      news: 'Noticias',
+      communications: 'Participaciones en congresos',
       theses: 'Tesis',
     },
     empty: 'Contenido próximamente.',
@@ -107,6 +109,7 @@ const es = {
       master: 'Trabajo Fin de Máster',
       tfg: 'Trabajo Fin de Grado',
     },
+    inProgress: 'En curso',
     supervisedBy: 'Dirección',
   },
   team: {
@@ -127,6 +130,8 @@ const es = {
     },
   },
   news: {
+    title: 'Noticias',
+    intro: 'Novedades y actualidad del Proyecto NOVA y del laboratorio PreMind.',
     published: 'Publicado el',
     backToList: '← Todas las noticias',
   },
@@ -153,7 +158,12 @@ const es = {
     research: {
       title: 'Investigación',
       description:
-        'Publicaciones científicas, noticias y tesis del Proyecto NOVA y del laboratorio PreMind (Universidad Villanueva).',
+        'Publicaciones científicas, participaciones en congresos y tesis del Proyecto NOVA y del laboratorio PreMind (Universidad Villanueva).',
+    },
+    news: {
+      title: 'Noticias',
+      description:
+        'Novedades y actualidad del Proyecto NOVA y del laboratorio PreMind (Universidad Villanueva).',
     },
     team: {
       title: 'Equipo',
@@ -181,6 +191,7 @@ const en: Dictionary = {
   nav: {
     home: 'Home',
     research: 'Research',
+    news: 'News',
     team: 'Team',
     skip: 'Skip to content',
   },
@@ -192,11 +203,12 @@ const en: Dictionary = {
   hero: {
     eyebrow: 'PreMind · Villanueva University',
     title: 'NOVA',
-    tagline: 'Navigating Outcomes Via Analytics',
+    tagline: 'Precision Mental Health: Navigating Outcomes Via Analytics',
     subtitle:
       'Bringing precision mental health to real-world psychological services: the right intervention, at the right time, by the right clinician, for each individual.',
     ctaContact: 'Get involved',
     ctaResearch: 'View research',
+    partners: 'Powered by',
   },
   summary: {
     heading: 'What is the NOVA project?',
@@ -248,10 +260,10 @@ const en: Dictionary = {
   },
   research: {
     title: 'Research',
-    intro: 'Publications, news and theses from the NOVA project and the PreMind lab.',
+    intro: 'Publications, conference participation and theses from the NOVA project and the PreMind lab.',
     tabs: {
       publications: 'Publications',
-      news: 'News',
+      communications: 'Conference participation',
       theses: 'Theses',
     },
     empty: 'Coming soon.',
@@ -271,6 +283,7 @@ const en: Dictionary = {
       master: "Master's thesis",
       tfg: 'Undergraduate thesis',
     },
+    inProgress: 'In progress',
     supervisedBy: 'Supervision',
   },
   team: {
@@ -291,6 +304,8 @@ const en: Dictionary = {
     },
   },
   news: {
+    title: 'News',
+    intro: 'Updates and latest news from the NOVA project and the PreMind lab.',
     published: 'Published on',
     backToList: '← All news',
   },
@@ -317,7 +332,12 @@ const en: Dictionary = {
     research: {
       title: 'Research',
       description:
-        'Scientific publications, news and theses from the NOVA project and the PreMind lab (Villanueva University).',
+        'Scientific publications, conference participation and theses from the NOVA project and the PreMind lab (Villanueva University).',
+    },
+    news: {
+      title: 'News',
+      description:
+        'Updates and latest news from the NOVA project and the PreMind lab (Villanueva University).',
     },
     team: {
       title: 'Team',
