@@ -2,5 +2,8 @@ type: communication
 title: "Innovación Tecnológica para una Salud Mental de Precisión"
 authors:
   - "Roca, P."
-venue: "Ponencia invitada · XXII Jornadas Científicas SEPCyS «Avances y Retos para una Psicología Basada en la Evidencia»"
+format:
+  es: Ponencia invitada
+  en: Invited talk
+venue: "XXII Jornadas Científicas SEPCyS «Avances y Retos para una Psicología Basada en la Evidencia»"
 year: 2025

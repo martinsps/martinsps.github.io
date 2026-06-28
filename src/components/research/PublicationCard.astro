@@ -10,6 +10,8 @@ const { entry, lang } = Astro.props;
 const t = useTranslations(lang);
 const d = entry.data;
 const summary = pickLocalized(d.summary, lang);
+const format = pickLocalized(d.format, lang);
+const venueLine = [format, d.venue].filter(Boolean).join(' · ');
 const doiUrl = d.doi ? `https://doi.org/${d.doi}` : undefined;
 const dateLabel = d.date
   ? new Intl.DateTimeFormat(lang, { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(d.date)
@@ -33,7 +35,7 @@ const dateLabel = d.date
     }
   </h3>
   {d.authors.length > 0 && <p class="pub__authors">{d.authors.join('; ')}</p>}
-  {d.venue && <p class="pub__venue">{d.venue}</p>}
+  {venueLine && <p class="pub__venue">{venueLine}</p>}
   {summary && <p class="pub__summary">{summary}</p>}
   <div class="pub__meta">
     {

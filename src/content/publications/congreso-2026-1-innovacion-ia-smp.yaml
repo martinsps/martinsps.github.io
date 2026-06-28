@@ -2,5 +2,8 @@ type: communication
 title: "Innovación Tecnológica e Inteligencia Artificial para una Salud Mental de Precisión"
 authors:
   - "Roca, P."
-venue: "Ponencia inaugural · II Congreso Internacional de Psicología, Innovación Tecnológica (IA) y Emprendimiento"
+format:
+  es: Ponencia inaugural
+  en: Opening keynote
+venue: "II Congreso Internacional de Psicología, Innovación Tecnológica (IA) y Emprendimiento"
 year: 2026

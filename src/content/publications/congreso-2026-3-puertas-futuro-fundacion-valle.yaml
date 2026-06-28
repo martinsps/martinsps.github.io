@@ -2,5 +2,8 @@ type: communication
 title: "A las puertas del futuro: Psicología, IA y responsabilidad humana"
 authors:
   - "Roca, P."
-venue: "Conferencia invitada · Bienestar Digital, Fundación del Valle"
+format:
+  es: Conferencia invitada
+  en: Invited lecture
+venue: "Bienestar Digital, Fundación del Valle"
 year: 2026

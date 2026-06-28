@@ -2,5 +2,8 @@ type: communication
 title: "Inteligencia Artificial para una Salud Mental de Precisión"
 authors:
   - "Roca, P."
-venue: "Conferencia inaugural · Jornadas formativas del PRACTICUM, Facultad de Psicología, Universidad Pontificia de Salamanca"
+format:
+  es: Conferencia inaugural
+  en: Opening lecture
+venue: "Jornadas formativas del PRACTICUM, Facultad de Psicología, Universidad Pontificia de Salamanca"
 year: 2026

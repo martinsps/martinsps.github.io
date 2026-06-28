@@ -35,6 +35,8 @@ const publications = defineCollection({
     type: z.enum(['article', 'communication', 'chapter', 'preprint']).default('article'),
     title: z.string(),
     authors: z.array(z.string()).default([]),
+    /** Bilingual intervention type, e.g. "Ponencia invitada" / "Invited talk". */
+    format: localized.optional(),
     venue: z.string().optional(),
     year: z.number(),
     date: z.coerce.date().optional(),
