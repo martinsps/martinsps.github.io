@@ -10,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const order = ['pi', 'core', 'training', 'advisor', 'collaborator'] as const;
+const order = ['villanueva', 'medea', 'collaborator'] as const;
 const members = await getCollection('team');
 const groups = order
   .map((cat) => ({

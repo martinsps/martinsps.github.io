@@ -1,10 +1,10 @@
 # TODO: verifica el rol y añade foto/bio/enlaces.
 name: Sara I. Rodríguez Moreno
-category: core
+category: villanueva
 order: 2
 role:
-  es: Co-investigadora principal
-  en: Co-principal investigator
+  es: Investigadora
+  en: Researcher
 # bio:
 #   es: ...
 #   en: ...

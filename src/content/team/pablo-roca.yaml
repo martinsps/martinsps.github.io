@@ -1,7 +1,7 @@
 # TODO: verifica el contenido y añade foto/enlaces (ORCID, Scholar, LinkedIn).
 # Para la foto: coloca el archivo junto a este YAML y descomenta `photo`.
 name: Pablo Roca Morales
-category: pi
+category: villanueva
 order: 1
 role:
   es: Investigador principal

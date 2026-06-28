@@ -12,7 +12,7 @@ const team = defineCollection({
     z.object({
       name: z.string(),
       role: localized,
-      category: z.enum(['pi', 'core', 'training', 'advisor', 'collaborator']),
+      category: z.enum(['villanueva', 'medea', 'collaborator']),
       photo: image().optional(),
       bio: localized.optional(),
       order: z.number().default(99),

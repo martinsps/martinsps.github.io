@@ -1,0 +1,8 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Rob Saunders
+category: collaborator
+order: 5
+role:
+  es: University College London
+  en: University College London
+# photo: ./photos/rob-saunders.jpg

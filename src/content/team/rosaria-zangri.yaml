@@ -1,0 +1,8 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Rosaria Maria Zangri
+category: medea
+order: 1
+role:
+  es: Investigadora
+  en: Researcher
+# photo: ./photos/rosaria-zangri.jpg

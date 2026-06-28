@@ -1,0 +1,8 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Eduardo P. García del Valle
+category: medea
+order: 2
+role:
+  es: Investigador
+  en: Researcher
+# photo: ./photos/eduardo-garcia-del-valle.jpg

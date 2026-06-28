@@ -1,0 +1,8 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Luis Javier Herrera
+category: collaborator
+order: 6
+role:
+  es: Universidad de Granada
+  en: University of Granada
+# photo: ./photos/luis-javier-herrera.jpg

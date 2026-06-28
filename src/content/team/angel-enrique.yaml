@@ -1,0 +1,8 @@
+# TODO: verifica el rol y añade foto/bio/enlaces.
+name: Angel Enrique
+category: collaborator
+order: 4
+role:
+  es: Amwell Science
+  en: Amwell Science
+# photo: ./photos/angel-enrique.jpg
