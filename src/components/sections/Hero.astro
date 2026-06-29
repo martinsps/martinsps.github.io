@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import logoMinisterio from '../../assets/funders/logoMinisterio.jpeg';
 
 interface Props {
   lang: Lang;
@@ -22,28 +24,42 @@ const t = useTranslations(lang);
         </a>
       </div>
     </div>
-    <ul class="hero__logos" aria-label={t.hero.partners}>
-      <li class="hero__logo-chip">
-        <img
-          class="hero__logo"
-          src="/logos/premind.png"
-          alt="PreMind · Precision Mind Lab"
-          width="2000"
-          height="615"
-          loading="eager"
-        />
-      </li>
-      <li class="hero__logo-chip">
-        <img
-          class="hero__logo"
-          src="/logos/villanueva.png"
-          alt="Universidad Villanueva"
-          width="1920"
-          height="615"
-          loading="eager"
-        />
-      </li>
-    </ul>
+    <div class="hero__brands">
+      <ul class="hero__logos" aria-label={t.hero.partners}>
+        <li>
+          <img
+            class="hero__logo"
+            src="/logos/premind.png"
+            alt="PreMind · Precision Mind Lab"
+            width="2000"
+            height="615"
+            loading="eager"
+          />
+        </li>
+        <li>
+          <img
+            class="hero__logo"
+            src="/logos/villanueva.png"
+            alt="Universidad Villanueva"
+            width="1920"
+            height="615"
+            loading="eager"
+          />
+        </li>
+      </ul>
+      <div class="hero__funder">
+        <span class="hero__funder-label">{t.footer.fundedBy}</span>
+        <div class="hero__funder-chip">
+          <Image
+            src={logoMinisterio}
+            alt={t.footer.funder}
+            width={1600}
+            height={328}
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -107,31 +123,58 @@ const t = useTranslations(lang);
     color: var(--color-primary);
     border-color: var(--color-on-primary);
   }
-  .hero__logos {
+  .hero__brands {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: var(--space-6);
-    flex: 0 0 auto;
+    gap: var(--space-8);
+  }
+  .hero__logos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
     margin: 0;
     padding: 0;
     list-style: none;
   }
-  .hero__logo-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: var(--radius-md);
-    padding: var(--space-4) var(--space-6);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  }
   .hero__logo {
     height: 3.5rem;
-    width: 12rem;
+    width: 13rem;
     object-fit: contain;
     object-position: center;
     display: block;
+    /* The source logos are solid black on a transparent background;
+       turn them white so they read on the dark hero without a chip. */
+    filter: brightness(0) invert(1);
+  }
+  /* The funder logo is an official multicolour mark and must keep its
+     colours, so it stays on a white plate. */
+  .hero__funder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .hero__funder-label {
+    font-size: var(--fs-200);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-on-primary) 70%, transparent);
+  }
+  .hero__funder-chip {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .hero__funder-chip img {
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
   }
   /* When the two columns no longer fit, drop the logos below the content,
      centered and laid out horizontally. */
@@ -143,19 +186,22 @@ const t = useTranslations(lang);
     .hero__content {
       flex: 1 1 auto;
     }
+    .hero__brands {
+      align-items: center;
+      margin-top: var(--space-6);
+    }
     .hero__logos {
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: var(--space-6);
-      margin-top: var(--space-6);
+      gap: var(--space-8);
     }
   }
   @media (max-width: 30rem) {
     .hero__logo {
       height: 2.75rem;
-      width: 9.5rem;
+      width: 10.5rem;
     }
   }
 </style>
