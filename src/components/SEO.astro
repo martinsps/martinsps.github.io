@@ -23,6 +23,43 @@ const alternates = getAlternateLinks(Astro.url).map((alt) => ({
 const xDefault = alternates.find((a) => a.lang === 'es')?.href;
 const ogImageURL = ogImage ? new URL(ogImage, base).href : undefined;
 const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+
+// Structured data so search engines recognise this as a research project
+// (PreMind lab, Universidad Villanueva) rather than an unrelated "Nova" brand.
+const siteName = lang === 'es' ? 'Proyecto NOVA' : 'NOVA Project';
+const siteDescription =
+  lang === 'es'
+    ? 'Proyecto de investigación I+D del laboratorio PreMind (Universidad Villanueva) para implantar la salud mental de precisión en servicios psicológicos reales.'
+    : 'R&D research project of the PreMind lab (Villanueva University) implementing precision mental health in real-world psychological services.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ResearchProject',
+      '@id': new URL('/#project', base).href,
+      name: siteName,
+      alternateName: 'NOVA — Navigating Outcomes Via Analytics',
+      description: siteDescription,
+      url: base.href,
+      parentOrganization: {
+        '@type': 'ResearchOrganization',
+        name: 'PreMind — Precision Mind Lab',
+        parentOrganization: {
+          '@type': 'CollegeOrUniversity',
+          name: lang === 'es' ? 'Universidad Villanueva' : 'Villanueva University',
+        },
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': new URL('/#website', base).href,
+      url: base.href,
+      name: siteName,
+      inLanguage: ogLocale,
+      description: siteDescription,
+    },
+  ],
+};
 ---
 
 <title>{title}</title>
@@ -50,3 +87,6 @@ const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+
+<!-- Structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

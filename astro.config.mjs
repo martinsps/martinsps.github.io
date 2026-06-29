@@ -4,11 +4,10 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 //
-// NOTE: `site` should be the project's final canonical URL. It is currently set
-// to this repository's GitHub Pages URL — update it to the custom domain once it
-// is contracted (this drives canonical URLs, hreflang alternates and the sitemap).
+// NOTE: `site` is the project's final canonical URL. It drives canonical URLs,
+// hreflang alternates and the sitemap, so it must match the live custom domain.
 export default defineConfig({
-  site: 'https://martinsps.github.io',
+  site: 'https://project-nova.es',
   // base: '/', // user/org pages repo is served from the domain root.
   i18n: {
     defaultLocale: 'es',
