@@ -120,6 +120,7 @@ const es = {
       medea: 'Medea Mind',
       collaborator: 'Colaboradores',
     },
+    organizations: 'Entidades colaboradoras',
     premindCta: 'Conoce el laboratorio PreMind',
     links: {
       personal: 'Web personal',
@@ -294,6 +295,7 @@ const en: Dictionary = {
       medea: 'Medea Mind',
       collaborator: 'Collaborators',
     },
+    organizations: 'Collaborating organizations',
     premindCta: 'Discover the PreMind lab',
     links: {
       personal: 'Website',

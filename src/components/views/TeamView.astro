@@ -21,6 +21,8 @@ const groups = order
       .sort((a, b) => a.data.order - b.data.order),
   }))
   .filter((g) => g.items.length > 0);
+
+const organizations = [{ name: 'Psypilot', href: EXTERNAL_LINKS.psypilot }];
 ---
 
 <section class="section">
@@ -44,6 +46,21 @@ const groups = order
       ))
     }
 
+    <div class="team-group">
+      <h2 class="team-group__title">{t.team.organizations}</h2>
+      <ul class="org-list" role="list">
+        {
+          organizations.map((o) => (
+            <li>
+              <a class="org card" href={o.href} target="_blank" rel="noopener noreferrer">
+                {o.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
     <div class="team-cta">
       <a class="btn btn--outline" href={EXTERNAL_LINKS.premind} target="_blank" rel="noopener noreferrer">
         {t.team.premindCta} →
@@ -65,6 +82,25 @@ const groups = order
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
     gap: var(--space-8);
+  }
+  .org-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .org {
+    display: inline-block;
+    font-size: var(--fs-500);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .org:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-dark);
   }
   .team-cta {
     margin-top: var(--space-16);
